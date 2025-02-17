@@ -407,253 +407,12 @@ Variable Notes
 | support vector machine w/ tuning | 0.75358 | |
 
 
-
-
-
-```python
-titanic.describe(include="all")
-```
-
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>PassengerId</th>
-      <th>Survived</th>
-      <th>Pclass</th>
-      <th>Name</th>
-      <th>Sex</th>
-      <th>Age</th>
-      <th>SibSp</th>
-      <th>Parch</th>
-      <th>Ticket</th>
-      <th>Fare</th>
-      <th>Cabin</th>
-      <th>Embarked</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>count</th>
-      <td>891.000000</td>
-      <td>891.000000</td>
-      <td>891.000000</td>
-      <td>891</td>
-      <td>891</td>
-      <td>714.000000</td>
-      <td>891.000000</td>
-      <td>891.000000</td>
-      <td>891</td>
-      <td>891.000000</td>
-      <td>204</td>
-      <td>889</td>
-    </tr>
-    <tr>
-      <th>unique</th>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>891</td>
-      <td>2</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>681</td>
-      <td>NaN</td>
-      <td>147</td>
-      <td>3</td>
-    </tr>
-    <tr>
-      <th>top</th>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>Braund, Mr. Owen Harris</td>
-      <td>male</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>347082</td>
-      <td>NaN</td>
-      <td>B96 B98</td>
-      <td>S</td>
-    </tr>
-    <tr>
-      <th>freq</th>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>1</td>
-      <td>577</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>7</td>
-      <td>NaN</td>
-      <td>4</td>
-      <td>644</td>
-    </tr>
-    <tr>
-      <th>mean</th>
-      <td>446.000000</td>
-      <td>0.383838</td>
-      <td>2.308642</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>29.699118</td>
-      <td>0.523008</td>
-      <td>0.381594</td>
-      <td>NaN</td>
-      <td>32.204208</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>std</th>
-      <td>257.353842</td>
-      <td>0.486592</td>
-      <td>0.836071</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>14.526497</td>
-      <td>1.102743</td>
-      <td>0.806057</td>
-      <td>NaN</td>
-      <td>49.693429</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>min</th>
-      <td>1.000000</td>
-      <td>0.000000</td>
-      <td>1.000000</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>0.420000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>NaN</td>
-      <td>0.000000</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>25%</th>
-      <td>223.500000</td>
-      <td>0.000000</td>
-      <td>2.000000</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>20.125000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>NaN</td>
-      <td>7.910400</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>50%</th>
-      <td>446.000000</td>
-      <td>0.000000</td>
-      <td>3.000000</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>28.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>NaN</td>
-      <td>14.454200</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>75%</th>
-      <td>668.500000</td>
-      <td>1.000000</td>
-      <td>3.000000</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>38.000000</td>
-      <td>1.000000</td>
-      <td>0.000000</td>
-      <td>NaN</td>
-      <td>31.000000</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>max</th>
-      <td>891.000000</td>
-      <td>1.000000</td>
-      <td>3.000000</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>80.000000</td>
-      <td>8.000000</td>
-      <td>6.000000</td>
-      <td>NaN</td>
-      <td>512.329200</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
-
-
-```python
-# Iterate over numeric columns in the 'titanic' DataFrame
-for column in titanic.select_dtypes(include=['object']).columns:
-        plt.figure(figsize=(8, 6))  # Adjust figure size as needed
-        sns.countplot(x=titanic[column])
-        plt.title(f'Distribution of {column}')
-        plt.xlabel(column)
-        plt.ylabel('Frequency')
-        plt.grid(True)
-        plt.show()
-```
-
-
-    
-![png](output_4_0.png)
-    
-
-
-
     
 ![png](output_4_1.png)
     
 
 
-
-    
-![png](output_4_2.png)
-    
-
-
-
-    
+   
 ![png](output_4_3.png)
     
 
@@ -665,20 +424,6 @@ for column in titanic.select_dtypes(include=['object']).columns:
 
 
 
-```python
-# Iterate over numeric columns in the 'titanic' DataFrame
-for column in titanic.select_dtypes(include=['number']).columns:
-        plt.figure(figsize=(8, 6))  # Adjust figure size as needed
-        plt.hist(titanic[column], bins=20)  # Corrected reference to 'titanic'
-        plt.title(f'Distribution of {column}')
-        plt.xlabel(column)
-        plt.ylabel('Frequency')
-        plt.grid(True)
-        plt.show()
-```
-
-
-    
 ![png](output_5_0.png)
     
 
@@ -767,40 +512,14 @@ titanic.info()
     
 
 
-```python
-# Age has a large number of missing values. Explore with the possibility of replacing the missing values.
-# Cabin has a very large set of missing values. Explore what the meaning is in historical context.
-# Embarked has 2 missing values. 
-```
+## Explore bivariate relationships and how to handle missing values
 
-
-```python
-# First explore whether we should replace missing values of age based on sex. The analysis suggests we should.
-sns.boxplot(x='Sex', y='Age', data=titanic)
-plt.show()
-```
-
-
-    
+First explore whether we should replace missing values of age based on sex. The analysis suggests we should. Missing values for sex are recoded as the mean for each sex.
+   
 ![png](output_9_0.png)
-    
 
+Next, while the particular cabin does not appear to relate to survival, having a cabin assigned does appear to predict survival.  Those assigned a cabin were much more likely to survive than those that were not. Cabin is recoded as a dichotomous variable reflecting assignment or not. Embarked is recoded into into dummy variable to reflect Cherbourg with value of 1 and others with value of 0.
 
-
-```python
-#Replace missing values of age with mean by sex.
-# Fill NaN values with the mean of their respective groups
-titanic['Age'] = titanic['Age'].fillna(titanic.groupby('Sex')['Age'].transform('mean'))
-```
-
-
-```python
-# Those assigned a cabin were much more likely to survive than those that were not.
-# Recode missing values
-titanic['Cabinassign'] = np.where(pd.isna(titanic['Cabin']), 0, 1)
-crosstab = pd.crosstab(titanic['Cabinassign'], titanic['Survived'], normalize='index')
-print(crosstab)
-```
 
     Survived            0         1
     Cabinassign                    
@@ -808,13 +527,7 @@ print(crosstab)
     1            0.333333  0.666667
     
 
-
-```python
-# Passengers who embarked from Cherbourg (C) were more likely to survive than those embraking from Queenstown (Q)
-# or Southahmpton(S).
-crosstab = pd.crosstab(titanic['Embarked'], titanic['Survived'], normalize='index')
-print(crosstab)
-```
+There does appear to be a relationship between where the passenger embarked from and survival. Passengers who embarked from Cherbourg (C) were more likely to survive than those embraking from Queenstown (Q) or Southahmpton(S).
 
     Survived         0         1
     Embarked                    
@@ -823,21 +536,7 @@ print(crosstab)
     S         0.663043  0.336957
     
 
-
-```python
-# Passengers who embarked from Cherbourg (C) were more likely to survive than those embraking from Queenstown (Q)
-# or Southahmpton(S). Recode into dummy variable to reflect Cherbourg with value of 1 and others with value of 0.
-
-titanic['Cherbourg'] = titanic['Embarked'].replace({'C': 1, 'Q': 0, 'S': 0})
-```
-
-
-```python
-# Passengers in first were more likely to survive than those in second class. Passengers in second class were more 
-# likely to survive than those in third class. 
-table=pd.crosstab(titanic['Pclass'], titanic['Survived'], normalize='index')
-print(table)
-```
+Passengers in first were more likely to survive than those in second class. Passengers in second class were more likely to survive than those in third class. 
 
     Survived         0         1
     Pclass                      
@@ -845,17 +544,8 @@ print(table)
     2         0.527174  0.472826
     3         0.757637  0.242363
     
-
-
-```python
-# Graph showing interaction between sex and class and survival. 
-sns.barplot(x='Pclass', y='Survived', hue='Sex', data=titanic)
-plt.show()
-
-```
-
-
-    
+While sex is expected to relate to survival, it appears that there is also an interaction effect between class, sex, and survival.
+   
 ![png](output_15_0.png)
     
 
