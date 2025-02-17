@@ -396,16 +396,6 @@ Variable Notes
 </table>
 </div>
 
-| Model | Accuracy | Notes |
-| --- | --- | --- |
-| logistic regression | 0.76794 | |
-| logistic regression w/ tuning| 0.78229 | |
-| random forest | 0.76076 | |
-| random forest w/ tuning | 0.76794 | |
-| k nearest neighbor | 0.77511 | Highest accuracy for K=5 |
-| support vector machine | 0.77272 | |
-| support vector machine w/ tuning | 0.75358 | |
-
 
     
 ![png](output_4_1.png)
@@ -595,6 +585,32 @@ Based on the exploratory data analysis, the model predicting survival on the Tit
 
 All variables are transformed using StandardScaler to have a mean of 0 and standard deviation of 1 (essentially a z-score).
 
+Four different approaches are used. For each (except for k nearest neighbor), a model is ran with out tunign and with tuning. Tuning includes cross-validation dividing up the training model in to five groups. 
+
+GridSearch from scikit-learn is used to select the best tuning parameters. 
+
+
+
+| Model | Accuracy | Notes |
+| --- | --- | --- |
+| logistic regression | 0.76794 | |
+| logistic regression w/ tuning| 0.78229 | |
+| random forest | 0.76076 | |
+| random forest w/ tuning | 0.76794 | |
+| k nearest neighbor | 0.77511 | Highest accuracy for K=5 |
+| support vector machine | 0.77272 | |
+| support vector machine w/ tuning | 0.75358 | Best parameters: {'C': 10, 'gamma': 'scale', 'kernel': 'rbf'}|
+
+Logistic Regression
+Selected from 
+
+param_grid = {'C': [0.01, 0.1, 1, 10, 100], 'penalty': ['l1', 'l2'], 'solver': ['liblinear', 'lbfgs']}
+
+grid_search = GridSearchCV(estimator=model, param_grid=param_grid, cv=5, scoring='accuracy') 
+
+
+
+
 ```python
 import pandas as pd
 from sklearn.model_selection import train_test_split
@@ -663,28 +679,6 @@ scaler = StandardScaler()
 standardized_data = scaler.fit_transform(subset_test)
 X_test = pd.DataFrame(standardized_data, columns=['Pclass', 'Sex_numeric', 'Parch', 'Fare', 'Cabinassign', 'Cherbourg', 'child', 'ClassSex_female_1', 'ClassSex_female_2', 'ClassSex_female_3', 'ClassSex_male_1', 'ClassSex_male_2', 'ClassSex_male_3'])
 
-X_test
-
-missing_values=X_test.isnull().sum()
-print(missing_values)
-
-```
-
-    Pclass               0
-    Sex_numeric          0
-    Parch                0
-    Fare                 0
-    Cabinassign          0
-    Cherbourg            0
-    child                0
-    ClassSex_female_1    0
-    ClassSex_female_2    0
-    ClassSex_female_3    0
-    ClassSex_male_1      0
-    ClassSex_male_2      0
-    ClassSex_male_3      0
-    dtype: int64
-    
 
 
 ```python
