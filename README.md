@@ -1,6 +1,6 @@
 # Titanic
 
-The data is from a beginning Kaggle competition to predict survivors of the famous Titanic disaster. Data of 2224 passengers is split into training and test data sets. The challenge is to develop of model from the training data set provided to predict who survived the Titanic disaster. This model is then used to predict whether a passenger survived in the test data set. 
+The data is from a beginning Kaggle competition to predict survivors of the famous Titanic disaster. On April 14, 1912, during its maiden voygage, the Titanic hit an iceberg and sank. Only 706 out of 2,240 passengers survived (31.5%). Data from a Kaggle competition is provided on 1,374 passengers, split between into training (n=892) and test (n=481) data sets. The survival status is only given with the training data. The challenge is to develop a model from this training set to predict who among the test data set would survive. 
 
 ## Initial review of data
 
