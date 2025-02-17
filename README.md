@@ -7,7 +7,7 @@ The data is from a beginning Kaggle competition to predict survivors of the famo
 * Cabin has a very large set of missing values. 
 * Embarked has 2 missing values. 
 
-### List of variables
+List of variables
 * Survival	0 = No, 1 = Yes
 * pclass: Ticket class	1 = 1st, 2 = 2nd, 3 = 3rd
 * sex	Sex	
@@ -583,226 +583,17 @@ It looks like the very young and very old are more likely to survive but the hig
 
 ## Modeling survival on the Titanic
 
+Based on the exploratory data analysis, the model predicting survival on the Titanic will include the following variables:
+* Pclass: Original coding as first, second, or third class.
+* Sex: Recoded as numeric variable, 1=female, 0=male.
+* Sibsp: Original coding as number of siblings and/or spouse.
+* Parch: Original coding as number of parents and/or children.
+* Cabinassign_code: Cabin recoded as dichotomous variable, 1=cabin assigned, 0=no cabin assigned.
+* Cherbourg: Recoding of embarked as dichotomous variables, 1=departed from Cherbourg, 0=departed from another city. 2 missing values for embarked are dropped.
+* Child: Age recoded as dichotomous variable 1=ages 0.34-84 years or 0=all others.
+* Series of six dichotous variables capturing the interaction between class and sex.
 
-```python
-titanic['Sex_numeric'] = titanic['Sex'].replace({'male': 0, 'female': 1})
-titanic.info()
-```
-
-    <class 'pandas.core.frame.DataFrame'>
-    RangeIndex: 891 entries, 0 to 890
-    Data columns (total 30 columns):
-     #   Column       Non-Null Count  Dtype   
-    ---  ------       --------------  -----   
-     0   PassengerId  891 non-null    int64   
-     1   Survived     891 non-null    int64   
-     2   Pclass       891 non-null    int64   
-     3   Name         891 non-null    object  
-     4   Sex          891 non-null    object  
-     5   Age          891 non-null    float64 
-     6   SibSp        891 non-null    int64   
-     7   Parch        891 non-null    int64   
-     8   Ticket       891 non-null    object  
-     9   Fare         891 non-null    float64 
-     10  Cabin        204 non-null    object  
-     11  Embarked     889 non-null    object  
-     12  Cabinassign  891 non-null    int32   
-     13  Cherbourg    889 non-null    float64 
-     14  bins         891 non-null    category
-     15  child        891 non-null    int64   
-     16  Sex_numeric  891 non-null    int64   
-     17  ClassSex     891 non-null    int64   
-     18  ClassSex_5   891 non-null    bool    
-     19  ClassSex_6   891 non-null    bool    
-     20  ClassSex_8   891 non-null    bool    
-     21  ClassSex_9   891 non-null    bool    
-     22  ClassSex_11  891 non-null    bool    
-     23  ClassSex_12  891 non-null    bool    
-     24  ClassSex_5   891 non-null    bool    
-     25  ClassSex_6   891 non-null    bool    
-     26  ClassSex_8   891 non-null    bool    
-     27  ClassSex_9   891 non-null    bool    
-     28  ClassSex_11  891 non-null    bool    
-     29  ClassSex_12  891 non-null    bool    
-    dtypes: bool(12), category(1), float64(3), int32(1), int64(8), object(5)
-    memory usage: 126.7+ KB
-    
-
-
-```python
-titanic['ClassSex'] =  titanic['Sex'].astype(str) + '_' + titanic['Pclass'].astype(str)
-
-# Step 2: Create dummy variables for the combined variable
-dummies = pd.get_dummies(titanic['ClassSex'], prefix='ClassSex')
-
-# Step 3: Combine the dummy variables back to the original DataFrame
-titanic = pd.concat([titanic, dummies], axis=1)
-
-titanic.info()
-```
-
-    <class 'pandas.core.frame.DataFrame'>
-    Index: 889 entries, 0 to 890
-    Data columns (total 42 columns):
-     #   Column             Non-Null Count  Dtype   
-    ---  ------             --------------  -----   
-     0   PassengerId        889 non-null    int64   
-     1   Survived           889 non-null    int64   
-     2   Pclass             889 non-null    int64   
-     3   Name               889 non-null    object  
-     4   Sex                889 non-null    object  
-     5   Age                889 non-null    float64 
-     6   SibSp              889 non-null    int64   
-     7   Parch              889 non-null    int64   
-     8   Ticket             889 non-null    object  
-     9   Fare               889 non-null    float64 
-     10  Cabin              202 non-null    object  
-     11  Embarked           889 non-null    object  
-     12  Cabinassign        889 non-null    int32   
-     13  Cherbourg          889 non-null    float64 
-     14  bins               889 non-null    category
-     15  child              889 non-null    int64   
-     16  Sex_numeric        889 non-null    int64   
-     17  ClassSex           889 non-null    object  
-     18  ClassSex_5         889 non-null    bool    
-     19  ClassSex_6         889 non-null    bool    
-     20  ClassSex_8         889 non-null    bool    
-     21  ClassSex_9         889 non-null    bool    
-     22  ClassSex_11        889 non-null    bool    
-     23  ClassSex_12        889 non-null    bool    
-     24  ClassSex_5         889 non-null    bool    
-     25  ClassSex_6         889 non-null    bool    
-     26  ClassSex_8         889 non-null    bool    
-     27  ClassSex_9         889 non-null    bool    
-     28  ClassSex_11        889 non-null    bool    
-     29  ClassSex_12        889 non-null    bool    
-     30  ClassSex_5         889 non-null    bool    
-     31  ClassSex_6         889 non-null    bool    
-     32  ClassSex_8         889 non-null    bool    
-     33  ClassSex_9         889 non-null    bool    
-     34  ClassSex_11        889 non-null    bool    
-     35  ClassSex_12        889 non-null    bool    
-     36  ClassSex_female_1  889 non-null    bool    
-     37  ClassSex_female_2  889 non-null    bool    
-     38  ClassSex_female_3  889 non-null    bool    
-     39  ClassSex_male_1    889 non-null    bool    
-     40  ClassSex_male_2    889 non-null    bool    
-     41  ClassSex_male_3    889 non-null    bool    
-    dtypes: bool(24), category(1), float64(3), int32(1), int64(7), object(6)
-    memory usage: 143.7+ KB
-    
-
-
-```python
-missing_values=titanic.isnull().sum()
-print(missing_values)
-titanic.info()
-```
-
-    PassengerId            0
-    Survived               0
-    Pclass                 0
-    Name                   0
-    Sex                    0
-    Age                    0
-    SibSp                  0
-    Parch                  0
-    Ticket                 0
-    Fare                   0
-    Cabin                687
-    Embarked               0
-    Cabinassign            0
-    Cherbourg              0
-    bins                   0
-    child                  0
-    Sex_numeric            0
-    ClassSex               0
-    ClassSex_5             0
-    ClassSex_6             0
-    ClassSex_8             0
-    ClassSex_9             0
-    ClassSex_11            0
-    ClassSex_12            0
-    ClassSex_5             0
-    ClassSex_6             0
-    ClassSex_8             0
-    ClassSex_9             0
-    ClassSex_11            0
-    ClassSex_12            0
-    ClassSex_5             0
-    ClassSex_6             0
-    ClassSex_8             0
-    ClassSex_9             0
-    ClassSex_11            0
-    ClassSex_12            0
-    ClassSex_female_1      0
-    ClassSex_female_2      0
-    ClassSex_female_3      0
-    ClassSex_male_1        0
-    ClassSex_male_2        0
-    ClassSex_male_3        0
-    dtype: int64
-    <class 'pandas.core.frame.DataFrame'>
-    Index: 889 entries, 0 to 890
-    Data columns (total 42 columns):
-     #   Column             Non-Null Count  Dtype   
-    ---  ------             --------------  -----   
-     0   PassengerId        889 non-null    int64   
-     1   Survived           889 non-null    int64   
-     2   Pclass             889 non-null    int64   
-     3   Name               889 non-null    object  
-     4   Sex                889 non-null    object  
-     5   Age                889 non-null    float64 
-     6   SibSp              889 non-null    int64   
-     7   Parch              889 non-null    int64   
-     8   Ticket             889 non-null    object  
-     9   Fare               889 non-null    float64 
-     10  Cabin              202 non-null    object  
-     11  Embarked           889 non-null    object  
-     12  Cabinassign        889 non-null    int32   
-     13  Cherbourg          889 non-null    float64 
-     14  bins               889 non-null    category
-     15  child              889 non-null    int64   
-     16  Sex_numeric        889 non-null    int64   
-     17  ClassSex           889 non-null    object  
-     18  ClassSex_5         889 non-null    bool    
-     19  ClassSex_6         889 non-null    bool    
-     20  ClassSex_8         889 non-null    bool    
-     21  ClassSex_9         889 non-null    bool    
-     22  ClassSex_11        889 non-null    bool    
-     23  ClassSex_12        889 non-null    bool    
-     24  ClassSex_5         889 non-null    bool    
-     25  ClassSex_6         889 non-null    bool    
-     26  ClassSex_8         889 non-null    bool    
-     27  ClassSex_9         889 non-null    bool    
-     28  ClassSex_11        889 non-null    bool    
-     29  ClassSex_12        889 non-null    bool    
-     30  ClassSex_5         889 non-null    bool    
-     31  ClassSex_6         889 non-null    bool    
-     32  ClassSex_8         889 non-null    bool    
-     33  ClassSex_9         889 non-null    bool    
-     34  ClassSex_11        889 non-null    bool    
-     35  ClassSex_12        889 non-null    bool    
-     36  ClassSex_female_1  889 non-null    bool    
-     37  ClassSex_female_2  889 non-null    bool    
-     38  ClassSex_female_3  889 non-null    bool    
-     39  ClassSex_male_1    889 non-null    bool    
-     40  ClassSex_male_2    889 non-null    bool    
-     41  ClassSex_male_3    889 non-null    bool    
-    dtypes: bool(24), category(1), float64(3), int32(1), int64(7), object(6)
-    memory usage: 143.7+ KB
-    
-
-
-```python
-titanic = titanic.dropna(subset=['Cherbourg'])
-```
-
-
-```python
-#The model should include the Survived, Pclass, Sex_code, Sibsp, Parch, Fare, Cabinassign_code, Cherbourg, child, 'ClassSex_5', ClassSex_6', 'ClassSex_8', 'ClassSex_9', 'ClassSex_11', 'ClassSex_12' 
-```
-
+All variables are transformed using StandardScaler to have a mean of 0 and standard deviation of 1 (essentially a z-score).
 
 ```python
 import pandas as pd
