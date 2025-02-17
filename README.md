@@ -2,6 +2,8 @@
 
 The data is from a beginning Kaggle competition to predict survivors of the famous Titanic disaster. On April 14, 1912, during its maiden voygage, the Titanic hit an iceberg and sank. Only 706 out of 2,240 passengers survived (31.5%). Data from a Kaggle competition is provided on 1,374 passengers, split between into training (n=892) and test (n=481) data sets. The survival status is only given with the training data. The challenge is to develop a model from this training set to predict who among the test data set would survive. 
 
+The final model had an accuracy of 0.78229, which places it as #2531 out of 13,327 entries. 
+
 ## Initial review of data
 
 List of variables
@@ -564,13 +566,9 @@ Based on the exploratory data analysis, the model predicting survival on the Tit
 * Child: Age recoded as dichotomous variable 1=ages 0.34-84 years or 0=all others.
 * Series of six dichotous variables capturing the interaction between class and sex.
 
-All variables are transformed using StandardScaler to have a mean of 0 and standard deviation of 1 (essentially a z-score).
+All variables are transformed using StandardScaler to have a mean of 0 and standard deviation of 1 (essentially a z-score). Four different approaches are used. For each (except for k nearest neighbor), a model is ran with out tuniNG and with tuning. Tuning includes cross-validation dividing up the training model in to five groups. 
 
-Four different approaches are used. For each (except for k nearest neighbor), a model is ran with out tunign and with tuning. Tuning includes cross-validation dividing up the training model in to five groups. 
-
-GridSearch from scikit-learn is used to select the best tuning parameters. 
-
-
+Logistic regression and random forest models share the same best tuning parameters with a low regularzation parameter, indicating a more generlizable model, with a lasso regression. The support vector machine model has a high regularization parameter indicating a tighter fit to the training data at a potential sacrifice of generalizability. The choice of number of neighboring values in KNN effectively is the tuning parameter and k=5 was selected versus models with k=3 or k=10 neighbors. The coefficients are listed below for the logistic regressionw with tuning parameteres and are helpful for indicating the relative strength of each predictor in the model. As expected, sex is the strongest value followed by an interaction of class and gender. The child variable performs as the next strongest predictor outside of sex and sex by class interactions. Essentially the official direction during the Titanic disaster to save women and children first is reflected in the data but with somewhat different impact depending on the ticket class of the woman or child.
 
 | Model | Accuracy | Notes |
 | --- | --- | --- |
