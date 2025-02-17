@@ -566,7 +566,7 @@ I examien the relationship between age and surviving. Age is divided into decile
     
 ![png](output_20_0.png)
     
-It looks like the very young and very old are more likely to survive but the highest category of age has only one case.
+It looks like the very young and very old are more likely to survive but the highest category of age has only one case. We create a dummy variable (child) to represent those aged 0.3 to 8.4 years.
 
 |Age Range | Survived |
 | ------------- | ------------- |
@@ -581,6 +581,7 @@ It looks like the very young and very old are more likely to survive but the hig
 |64.1 - 72.0 yrs | 0.0% |
 |72.0 - 80.0 yrs | 50.0% |
 
+## Modeling survival on the Titanic
 
 
 ```python
