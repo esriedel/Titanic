@@ -520,30 +520,30 @@ First explore whether we should replace missing values of age based on sex. The 
 
 Next, while the particular cabin does not appear to relate to survival, having a cabin assigned does appear to predict survival.  Those assigned a cabin were much more likely to survive than those that were not. Cabin is recoded as a dichotomous variable reflecting assignment or not. Embarked is recoded into into dummy variable to reflect Cherbourg with value of 1 and others with value of 0.
 
+|Assigned a cabin?  | Survived |
+| ------------- | ------------- |
+|No  | 30.0%  |
+| Yes  | 66.7% |
 
-    Survived            0         1
-    Cabinassign                    
-    0            0.700146  0.299854
-    1            0.333333  0.666667
     
 
 There does appear to be a relationship between where the passenger embarked from and survival. Passengers who embarked from Cherbourg (C) were more likely to survive than those embraking from Queenstown (Q) or Southahmpton(S).
 
-    Survived         0         1
-    Embarked                    
-    C         0.446429  0.553571
-    Q         0.610390  0.389610
-    S         0.663043  0.336957
-    
+|Embarked  | Survived |
+| ------------- | ------------- |
+|Cherbourg | 55.4%  |
+|Queenstown  | 40.0% |
+|Southahampton | 33.7% |
 
 Passengers in first were more likely to survive than those in second class. Passengers in second class were more likely to survive than those in third class. 
 
-    Survived         0         1
-    Pclass                      
-    1         0.370370  0.629630
-    2         0.527174  0.472826
-    3         0.757637  0.242363
-    
+|Class | Survived |
+| ------------- | ------------- |
+|First | 70.0%  |
+|Second  | 47.2% |
+|Third | 24.2% |
+
+   
 While sex is expected to relate to survival, it appears that there is also an interaction effect between class, sex, and survival.
    
 ![png](output_15_0.png)
