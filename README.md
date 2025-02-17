@@ -582,3 +582,23 @@ GridSearch from scikit-learn is used to select the best tuning parameters.
 | support vector machine | 0.77272 | |
 | support vector machine w/ tuning | 0.75358 | Best parameters: {'C': 10, 'gamma': 'scale', 'kernel': 'rbf'}|
 
+Model coefficients for logistic regression model with tuning
+
+| Predictor | Coefficient |
+| --- | --- |
+| Pclass | -0.19|
+| Sex | 0.43|
+| Sibsp | -0.07|
+| Parch | 0.09|
+| Cabinassign_code | 0.21|
+| Cherbourg | 0.13|
+| Child | 0.23|
+| Female, First Class | 0.30
+| Female, Second Class | 0.35|
+| Female, Third Class | 0.04
+| Male, First Class | -0.10|
+| Male, Second Class | -0.17|
+| Male, Third Class | -0.24|
+| Intercept | -0.54|
+
+
