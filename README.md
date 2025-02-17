@@ -580,8 +580,6 @@ Logistic regression and random forest models share the same best tuning paramete
 | support vector machine | 0.77272 | |
 | support vector machine w/ tuning | 0.75358 | Best parameters: {'C': 10, 'gamma': 'scale', 'kernel': 'rbf'}|
 
-Model coefficients for logistic regression model with tuning
-
 | Predictor | Coefficient |
 | --- | --- |
 | Pclass | -0.19|
