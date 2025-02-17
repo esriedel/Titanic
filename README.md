@@ -548,76 +548,20 @@ While sex is expected to relate to survival, it appears that there is also an in
    
 ![png](output_15_0.png)
     
+Higher fares, in general, are related to higher survival.
 
-
-
-```python
-# Higher fares predicted greater survival.
-sns.boxplot(x='Survived', y='Fare', data=titanic)
-plt.show()
-```
-
-
-    
 ![png](output_16_0.png)
     
-
-
-
-```python
-#Those who survived had fewer siblings and spouses but more parents / children. 
-sns.boxplot(data=titanic, x='Survived', y='SibSp')
-plt.show()
-sns.boxplot(data=titanic, x='Survived', y='Parch')
-plt.show()
-```
-
-
-    
+Family relationships appear related to survival  Those who survived had fewer siblings and spouses but more parents / children. 
+   
 ![png](output_17_0.png)
-    
-
-
-
-    
+      
 ![png](output_17_1.png)
     
-
-
-
-```python
-# Is there an interaction effect between the variables of SibSp and Parch. The heat map suggests not.
-table2=pd.crosstab(titanic['SibSp'], titanic['Parch'], values=titanic['Survived'], aggfunc='mean')
-print(table2)
-```
-
-    Parch         0         1         2         3    4         5    6
-    SibSp                                                            
-    0      0.303538  0.657895  0.724138  1.000000  0.0  0.000000  NaN
-    1      0.520325  0.596491  0.631579  0.333333  0.0  0.333333  0.0
-    2      0.250000  0.857143  0.500000  1.000000  NaN       NaN  NaN
-    3      1.000000  0.000000  0.285714       NaN  NaN       NaN  NaN
-    4           NaN  0.000000  0.333333       NaN  NaN       NaN  NaN
-    5           NaN       NaN  0.000000       NaN  NaN       NaN  NaN
-    8           NaN       NaN  0.000000       NaN  NaN       NaN  NaN
-    
-
-
-```python
-sns.heatmap(table2, cmap='coolwarm', annot=True)
-```
-
-
-
-
-    <Axes: xlabel='Parch', ylabel='SibSp'>
-
-
-
-
-    
+Is there an interaction effect between the variables of SibSp and Parch and survival. The heat map suggests not.
+   
 ![png](output_19_1.png)
-    
+
 
 
 
