@@ -11,8 +11,8 @@ List of variables
 * pclass: Ticket class	1 = 1st, 2 = 2nd, 3 = 3rd
 * sex	Sex	
 * Age	Age in years	
-* sibsp	# of siblings / spouses aboard the Titanic	
-* parch	# of parents / children aboard the Titanic	
+* sibsp	# of siblings or spouses aboard the Titanic	
+* parch	# of parents or children aboard the Titanic	
 * ticket	Ticket number	
 * fare	Passenger fare	
 * cabin	Cabin number	
@@ -21,10 +21,8 @@ List of variables
 Variable Notes
 * pclass: A proxy for socio-economic status (SES) 1st = Upper, 2nd = Middle, 3rd = Lower
 * age: Age is fractional if less than 1. If the age is estimated, is it in the form of xx.5
-* sibsp: The dataset defines family relations in this way. Sibling = brother, sister, stepbrother, stepsister
-* Spouse = husband, wife (mistresses and fiancés were ignored)
-* parch: The dataset defines family relations in this way. Parent = mother, father
-* Child = daughter, son, stepdaughter, stepson. Some children travelled only with a nanny, therefore parch=0 for them.
+* sibsp: Includes brother, sister, stepbrother, stepsister, husband, wife (mistresses and fiancés were ignored)
+* parch: Includes mother, father, daughter, son, stepdaughter, stepson. Some children travelled only with a nanny, therefore parch=0 for them.
 
 ### First 10 rows of dataframe
 
@@ -596,5 +594,6 @@ Logistic regression and random forest models share the same best tuning paramete
 | Male, Second Class | -0.17|
 | Male, Third Class | -0.24|
 | Intercept | -0.54|
+
 
 
